@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FotoApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FotoApp"
+    Shell.FlyoutBehavior="Disabled"
+    Title="FotoApp">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <Shell.ToolbarItems>
+        <ToolbarItem
+     x:Name="HomeToolbar"
+     Text="Home" 
+     Clicked="HomeToolbar_Clicked" />
+        <ToolbarItem
+     x:Name="NewPageToolbar"
+     Text="CreateAssignment"
+     Clicked="NewPageToolbar_Clicked" />
+        <ToolbarItem
+            x:Name="Assignments"
+            Text="Assignments"
+            Clicked="Assignments_Clicked" />
+    </Shell.ToolbarItems>
+
+    
+</Shell>
+

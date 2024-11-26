@@ -1,0 +1,28 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FotoApp.MainPage"
+             Title="Assignments">
+
+    
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Assignments List"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+
+            <!-- CollectionView for displaying assignments -->
+            <CollectionView x:Name="AssignmentsCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" Orientation="Vertical">
+                            <Label Text="{Binding Title}" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="{Binding Description}"                            
+                                   FontSize="12" TextColor="Gray" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
