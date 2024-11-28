@@ -9,7 +9,7 @@ namespace FotoApp
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(InlogPage), typeof(InlogPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
 
         }
 

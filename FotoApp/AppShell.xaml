@@ -9,7 +9,7 @@
 
     <ShellContent 
         Route="InlogPage" 
-        ContentTemplate="{DataTemplate local:InlogPage}" />
+        ContentTemplate="{DataTemplate local:LoginPage}" />
 
 
     <Shell.ToolbarItems>
