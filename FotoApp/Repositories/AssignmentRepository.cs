@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FotoApp.Modles;
 using FotoApp.JoinTables;
+using FotoApp.ViewModels;
 using SQLite;
 
 namespace FotoApp.Repositories
@@ -95,6 +96,35 @@ namespace FotoApp.Repositories
                             .Where(a => assignmentIds.Contains(a.Id))
                             .ToList();
         }
+
+        public List<AssignmentViewModel> GetAssignmentsWithThemes()
+        {
+            var assignments = _database.Table<Assignment>().ToList();
+            var assignmentViewModels = new List<AssignmentViewModel>();
+
+            foreach (var assignment in assignments)
+            {
+                var themeIds = _database.Table<AssignmentTheme>()
+                                        .Where(at => at.AssignmentId == assignment.Id)
+                                        .Select(at => at.ThemeId)
+                                        .ToList();
+
+                var themes = _database.Table<Theme>()
+                                      .Where(t => themeIds.Contains(t.Id))
+                                      .ToList();
+
+                assignmentViewModels.Add(new AssignmentViewModel
+                {
+                    Id = assignment.Id,
+                    Name = assignment.Name,
+                    Description = assignment.Description,
+                    Themes = themes
+                });
+            }
+
+            return assignmentViewModels;
+        }
+
 
 
 

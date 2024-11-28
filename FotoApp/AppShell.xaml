@@ -7,10 +7,10 @@
     Shell.FlyoutBehavior="Disabled"
     Title="FotoApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent 
+        Route="InlogPage" 
+        ContentTemplate="{DataTemplate local:InlogPage}" />
+
 
     <Shell.ToolbarItems>
         <ToolbarItem

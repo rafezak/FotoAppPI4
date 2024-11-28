@@ -8,18 +8,31 @@ public partial class Assignments : ContentPage
 {
 	private readonly AssignmentRepository _repository;
 
-
+	
     public Assignments()
 	{
+        InitializeComponent();
         _repository = new AssignmentRepository();
 
-		_repository.AddSampleData();
-
-
-        InitializeComponent();
-
-
 		
-		
-	}
+		LoadAssignments();
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void LoadAssignments()
+    {
+        // Fetch assignments with themes
+        var assignments = _repository.GetAssignmentsWithThemes();
+        AssignmentsCollectionView.ItemsSource = assignments;
+    }
 }

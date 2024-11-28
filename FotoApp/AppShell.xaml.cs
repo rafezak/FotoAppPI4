@@ -8,6 +8,9 @@ namespace FotoApp
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(InlogPage), typeof(InlogPage));
+
         }
 
 
