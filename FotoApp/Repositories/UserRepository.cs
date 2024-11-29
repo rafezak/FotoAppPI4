@@ -17,9 +17,22 @@ namespace FotoApp.Repositories
         {
             _database = new SQLiteConnection(DatabaseConstants.DatabasePath, DatabaseConstants.Flags);
             _database.CreateTable<User>();
+
+            if (!_database.Table<User>().Any(u => u.Role == UserRoles.Admin))
+            {
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword("admin");
+                var Admin = new User
+                {
+                    Username = "admin",
+                    PasswordHash = hashedPassword,
+                    Role = UserRoles.Admin
+                };
+
+                _database.Insert(Admin);
+            }
         }
 
-        public bool RegisterUser(string username, string password, string role = "user")
+        public bool RegisterUser(string username, string password, string role = UserRoles.Member)
         {
             // Check if user exists
             if (_database.Table<User>().Any(u => u.Username == username))
@@ -51,6 +64,13 @@ namespace FotoApp.Repositories
             }
             return null; // Login failed
         }
+
+        public string GetUserRole(string username)
+        {
+            var user = _database.Table<User>().FirstOrDefault(u => u.Username == username);
+            return user?.Role;
+        }
     }
+
 
 }
