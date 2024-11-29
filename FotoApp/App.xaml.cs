@@ -7,10 +7,9 @@
             InitializeComponent();
 
             // Set the startup page to AppShell
-            MainPage = new AppShell();
+            MainPage = new LoginPage();
 
             // Navigate to InlogPage
-            Shell.Current.GoToAsync("//InlogPage");
         }
     }
 }

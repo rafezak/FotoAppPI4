@@ -25,6 +25,8 @@
             x:Name="Assignments"
             Text="Assignments"
             Clicked="Assignments_Clicked" />
+
+        
     </Shell.ToolbarItems>
 
     

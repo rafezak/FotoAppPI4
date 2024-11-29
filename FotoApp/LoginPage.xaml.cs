@@ -20,15 +20,17 @@ public partial class LoginPage : ContentPage
         var user = _userRepository.LoginUser(username, password);
         if (user != null)
         {
-            await DisplayAlert("Welcome", $"Hello {user.Username}!", "OK");
-            // Navigate to the main page or dashboard
-            await Navigation.PushAsync(new Assignments());
+            await DisplayAlert("Welcome", $"Hello {user.Username} ({user.Role})!", "OK");
+
+            // Pass the current user to AppShell
+            Application.Current.MainPage = new AppShell(user);
         }
         else
         {
             await DisplayAlert("Error", "Invalid username or password.", "OK");
         }
     }
+
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
