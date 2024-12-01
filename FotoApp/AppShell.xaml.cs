@@ -30,7 +30,28 @@ namespace FotoApp
                     // Add the toolbar item for admins
                     ToolbarItems.Add(adminToolbarItem);
                 }
+
+                if (_currentUser.Role == UserRoles.Admin)
+                {
+                    var addThemeToolbarItem = new ToolbarItem
+                    {
+                        Text = "Add Theme",
+                        IconImageSource = "add_theme_icon.png", // Optional icon
+                        Command = new Command(async () =>
+                        {
+                            // Navigate to AddThemePage
+                            await Shell.Current.GoToAsync(nameof(CreateTheme));
+                        })
+                    };
+
+                    // Add the toolbar item for admins
+                    ToolbarItems.Add(addThemeToolbarItem);
+                }
+
+                // Register the AddThemePage route
+                Routing.RegisterRoute(nameof(CreateTheme), typeof(CreateTheme));
             }
+    
 
 
 

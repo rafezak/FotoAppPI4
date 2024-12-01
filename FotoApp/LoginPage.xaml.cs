@@ -23,7 +23,12 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Welcome", $"Hello {user.Username} ({user.Role})!", "OK");
 
             // Pass the current user to AppShell
+            Routing.RegisterRoute("mainpage", typeof(MainPage));
+
             Application.Current.MainPage = new AppShell(user);
+
+            // AppShell.xaml.cs
+            await Shell.Current.GoToAsync("mainpage");
         }
         else
         {

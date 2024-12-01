@@ -32,8 +32,10 @@ namespace FotoApp.Repositories
         public Assignment GetAssignmentById(int id) =>
             _database.Find<Assignment>(id);
 
-        public int AddAssignment(Assignment assignment) =>
+        public void AddAssignment(Assignment assignment)
+        {
             _database.Insert(assignment);
+        }
 
         public int UpdateAssignment(Assignment assignment) =>
             _database.Update(assignment);
@@ -61,6 +63,8 @@ namespace FotoApp.Repositories
             // Link the theme to the assignment
             AddThemeToAssignment(assignment.Id, theme.Id);
         }
+
+
 
 
         public void AddThemeToAssignment(int assignmentId, int themeId)
