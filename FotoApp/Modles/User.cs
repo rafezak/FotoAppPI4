@@ -18,6 +18,8 @@ namespace FotoApp.Modles
         public string PasswordHash { get; set; } // Store hashed password
 
         public string Role { get; set; } // e.g., "user", "admin"
+
+        public int Points { get; set; } // User points
     }
 
 }

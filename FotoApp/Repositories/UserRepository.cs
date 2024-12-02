@@ -25,7 +25,9 @@ namespace FotoApp.Repositories
                 {
                     Username = "admin",
                     PasswordHash = hashedPassword,
-                    Role = UserRoles.Admin
+                    Role = UserRoles.Admin,
+                    Points = 10
+
                 };
 
                 _database.Insert(Admin);
@@ -69,6 +71,29 @@ namespace FotoApp.Repositories
         {
             var user = _database.Table<User>().FirstOrDefault(u => u.Username == username);
             return user?.Role;
+        }
+
+
+        public List<User> GetAllUsers() => _database.Table<User>().ToList();
+
+        public User GetUserById(int userId) => _database.Find<User>(userId);
+
+
+
+        public void UpdateUserPoints(int userId, int points)
+        {
+            var user = GetUserById(userId);
+            if (user != null)
+            {
+                user.Points = points;
+                _database.Update(user);
+            }
+        }
+
+
+        public void DeleteUser(int userId)
+        {
+            _database.Delete<User>(userId);
         }
     }
 

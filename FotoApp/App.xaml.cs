@@ -6,10 +6,7 @@
         {
             InitializeComponent();
 
-            // Set the startup page to AppShell
-            MainPage = new LoginPage();
-
-            // Navigate to InlogPage
+            MainPage = new NavigationPage(new LoginPage());
         }
     }
 }

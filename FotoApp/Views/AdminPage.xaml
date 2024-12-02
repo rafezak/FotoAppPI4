@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FotoApp.Views.AdminPage"
              Title="AdminPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the Admin Dashboard!" 
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <Label Text="User Management" FontSize="Large" HorizontalOptions="Center" />
+        <ListView x:Name="UserListView" ItemSelected="OnUserSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Username}" FontSize="Medium" />
+                            <Label Text="{Binding Points}" FontSize="Medium" />
+                            <Button Text="Edit Points" Clicked="OnEditPointsClicked" />
+                            <Button x:Name="DeleteUser" Text="Delete User" Clicked="DeleteUser_Clicked"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

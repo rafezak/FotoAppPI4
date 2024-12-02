@@ -26,7 +26,11 @@
             Text="Assignments"
             Clicked="Assignments_Clicked" />
 
-        
+
+        <ToolbarItem Text="{Binding DisplayPoints}" Order="Secondary" />
+
+
+
     </Shell.ToolbarItems>
 
     
