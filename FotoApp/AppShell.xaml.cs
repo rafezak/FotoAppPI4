@@ -5,7 +5,7 @@ namespace FotoApp
     public partial class AppShell : Shell
     {
         private readonly User _currentUser;
-        public User LoggedInUser { get; private set; }
+        public static User LoggedInUser { get; private set; }
 
 
         public AppShell(User currentUser)

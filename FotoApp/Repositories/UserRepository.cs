@@ -95,6 +95,12 @@ namespace FotoApp.Repositories
         {
             _database.Delete<User>(userId);
         }
+
+        public void UpdateUser(User user)
+        {
+            // Update the user's record in the database
+            _database.Update(user);  // This assumes User has a primary key and will be updated based on the Id
+        }
     }
 
 
