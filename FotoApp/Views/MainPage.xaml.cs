@@ -19,14 +19,7 @@ namespace FotoApp
             _repository = new AssignmentRepository();
             Assignments = new ObservableCollection<Assignment>(_repository.GetAllAssignments());
 
-            // Bind the collection to the CollectionView
-            AssignmentsCollectionView.ItemsSource = Assignments;
-
-            // Add a test assignment if the database is empty
-            if (!Assignments.Any())
-            {
-                AddSampleData();
-            }
+            
         }
 
         private void AddSampleData()

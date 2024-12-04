@@ -6,23 +6,73 @@
     
 
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Label Text="Assignments List"
-                   FontSize="24"
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Logo -->
+                <Image Source="app_logo.png" 
+                   HeightRequest="100" 
                    HorizontalOptions="Center" />
 
-            <!-- CollectionView for displaying assignments -->
-            <CollectionView x:Name="AssignmentsCollectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="10" Orientation="Vertical">
-                            <Label Text="{Binding Title}" FontSize="18" FontAttributes="Bold" />
-                            <Label Text="{Binding Description}"                            
-                                   FontSize="12" TextColor="Gray" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+                <!-- Welcome Text -->
+                <Label Text="Welcome to FotoApp" 
+                   FontSize="32" 
+                   TextColor="White" 
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold" />
+
+                <Label Text="Capture, Share, and Connect!" 
+                   FontSize="18" 
+                   TextColor="#AAAAAA" 
+                   HorizontalOptions="Center" />
+
+                <!-- Feature Buttons -->
+                <Button Text="📷 Upload a Picture"
+                    FontSize="18"
+                    TextColor="White"
+                    BackgroundColor="#4CAF50"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                     />
+
+                <Button Text="📰 View Feed"
+                    FontSize="18"
+                    TextColor="White"
+                    BackgroundColor="#2196F3"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                     />
+
+                <Button Text="⚙️ Admin Panel"
+                    FontSize="18"
+                    TextColor="White"
+                    BackgroundColor="#FF5722"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    
+                    IsVisible="{Binding IsAdmin}" />
+
+                <!-- Divider -->
+                <BoxView HeightRequest="2" 
+                     BackgroundColor="#444444" 
+                     HorizontalOptions="Fill" />
+
+                <!-- Information Section -->
+                <Label Text="Discover amazing photos and share your moments with the community."
+                   FontSize="16"
+                   TextColor="#AAAAAA"
+                   HorizontalOptions="Center"
+                   LineBreakMode="WordWrap"
+                   HorizontalTextAlignment="Center" />
+
+                <Label Text="Let your creativity shine with FotoApp!"
+                   FontSize="16"
+                   TextColor="#AAAAAA"
+                   HorizontalOptions="Center"
+                   LineBreakMode="WordWrap"
+                   HorizontalTextAlignment="Center" />
+
+            </VerticalStackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
