@@ -17,14 +17,17 @@
      x:Name="HomeToolbar"
      Text="Home" 
      Clicked="HomeToolbar_Clicked" />
-        <ToolbarItem
-     x:Name="NewPageToolbar"
-     Text="CreateAssignment"
-     Clicked="NewPageToolbar_Clicked" />
+        
         <ToolbarItem
             x:Name="Assignments"
             Text="Assignments"
             Clicked="Assignments_Clicked" />
+
+        <ToolbarItem
+            x:Name="Profile"
+            Priority="2"
+            
+            IconImageSource="profile.png" />
 
 
         <ToolbarItem Text="{Binding DisplayPoints}" Order="Secondary" />

@@ -35,4 +35,10 @@ public partial class Assignments : ContentPage
         var assignments = _repository.GetAssignmentsWithThemes();
         AssignmentsCollectionView.ItemsSource = assignments;
     }
+
+    private void NewPageToolbar_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CreateAssignment());
+    }
+
 }

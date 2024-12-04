@@ -22,6 +22,7 @@ namespace FotoApp
                 {
                     Text = "Admin",
                     IconImageSource = "admin_icon.png", // Optional icon
+                    Priority = 2,
                     Command = new Command(async () =>
                     {
                         // Navigate to Admin page
@@ -80,11 +81,7 @@ namespace FotoApp
 
             }
 
-            private void NewPageToolbar_Clicked(object sender, EventArgs e)
-            {
-                Navigation.PushAsync(new CreateAssignment());
-            }
-
+           
             private void Assignments_Clicked(object sender, EventArgs e)
             {
                 Navigation.PushAsync(new Assignments());
