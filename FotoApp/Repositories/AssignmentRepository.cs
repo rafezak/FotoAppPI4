@@ -213,6 +213,13 @@ namespace FotoApp.Repositories
         }
 
 
+        public bool HasUserJoinedAssignment(int userId, int assignmentId)
+        {
+            return _database.Table<AssignmentUser>()
+                            .Any(au => au.UserId == userId && au.AssignmentId == assignmentId);
+        }
+
+
 
 
 

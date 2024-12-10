@@ -18,7 +18,7 @@ namespace FotoApp.Modles
 
             public DateTime UploadedAt { get; set; }  // When the picture was uploaded
 
-        public string ImagePath { get; set; }  // Path to the image
+            public string ImagePath { get; set; }  // Path to the image
             
             
 

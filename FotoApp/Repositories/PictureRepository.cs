@@ -12,19 +12,22 @@ namespace FotoApp.Repositories
     {
         private readonly SQLiteConnection _database;
 
-        public PictureRepository(string dbPath)
+        public PictureRepository()
         {
-            _database = new SQLiteConnection(dbPath);
-        }
-
-        public List<Picture> GetPicturesByAssignment(int assignmentId)
-        {
-            return _database.Table<Picture>().Where(p => p.AssignmentId == assignmentId).ToList();
+            _database = new SQLiteConnection(DatabaseConstants.DatabasePath, DatabaseConstants.Flags);
+            _database.CreateTable<Picture>();
         }
 
         public void AddPicture(Picture picture)
         {
             _database.Insert(picture);
+        }
+
+        public List<Picture> GetPicturesForAssignment(int assignmentId)
+        {
+            return _database.Table<Picture>()
+                            .Where(p => p.AssignmentId == assignmentId)
+                            .ToList();
         }
     }
 }

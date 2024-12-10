@@ -27,7 +27,24 @@
                 BackgroundColor="Green"
                 TextColor="White"
                 Margin="0,20,0,0" />
+
+
+            <Button
+                x:Name="UploadPictureButton"
+                Text="Upload Picture"
+                Clicked="OnUploadPictureClicked"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                Margin="10"/>
             
+            <CollectionView x:Name="PicturesCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding FilePath}" HeightRequest="100" WidthRequest="100" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
