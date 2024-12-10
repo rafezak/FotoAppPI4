@@ -16,11 +16,15 @@ namespace FotoApp.Modles
 
             public int AssignmentId { get; set; }  // Link to the Assignment
 
-            public string ImagePath { get; set; }  // Path to the image
+            public DateTime UploadedAt { get; set; }  // When the picture was uploaded
 
-        [ManyToOne]
-              // Link to the Assignment (assuming many-to-one relationship)
-            public Assignment Assignment { get; set; }
+        public string ImagePath { get; set; }  // Path to the image
+            
+            
+
+
+
+      
         
 
     }

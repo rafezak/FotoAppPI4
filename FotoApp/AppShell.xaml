@@ -14,6 +14,7 @@
 
     <Shell.ToolbarItems>
         <ToolbarItem
+            
      x:Name="HomeToolbar"
      Text="Home" 
      Clicked="HomeToolbar_Clicked" />
@@ -26,7 +27,7 @@
         <ToolbarItem
             x:Name="Profile"
             Priority="2"
-            
+            Clicked="Profile_Clicked"
             IconImageSource="profile.png" />
 
 

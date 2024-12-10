@@ -24,6 +24,7 @@ namespace FotoApp.Repositories
             _database.CreateTable<Assignment>();
             _database.CreateTable<Theme>();
             _database.CreateTable<AssignmentTheme>();
+            _database.CreateTable<AssignmentUser>();
         }
 
         public List<Assignment> GetAllAssignments() =>
@@ -63,6 +64,9 @@ namespace FotoApp.Repositories
             // Link the theme to the assignment
             AddThemeToAssignment(assignment.Id, theme.Id);
         }
+
+        
+
 
 
 
@@ -127,7 +131,90 @@ namespace FotoApp.Repositories
             }
 
             return assignmentViewModels;
+            
         }
+
+        public List<AssignmentViewModel> GetAssignmentsWithThemesForUser(int userId)
+        {
+            var assignmentIds = _database.Table<AssignmentUser>()
+                                         .Where(au => au.UserId == userId)
+                                         .Select(au => au.AssignmentId)
+                                         .ToList();
+
+            var assignments = _database.Table<Assignment>()
+                                       .Where(a => assignmentIds.Contains(a.Id))
+                                       .ToList();
+
+            var assignmentViewModels = new List<AssignmentViewModel>();
+
+            foreach (var assignment in assignments)
+            {
+                var themeIds = _database.Table<AssignmentTheme>()
+                                        .Where(at => at.AssignmentId == assignment.Id)
+                                        .Select(at => at.ThemeId)
+                                        .ToList();
+
+                var themes = _database.Table<Theme>()
+                                      .Where(t => themeIds.Contains(t.Id))
+                                      .ToList();
+
+                assignmentViewModels.Add(new AssignmentViewModel
+                {
+                    Id = assignment.Id,
+                    Name = assignment.Name,
+                    Description = assignment.Description,
+                    Themes = themes
+                });
+            }
+
+            return assignmentViewModels;
+        }
+
+
+
+        public void JoinAssignment(int userId, int assignmentId)
+        {
+            // Check if the user is already joined to the assignment
+            var existingJoin = _database.Table<AssignmentUser>()
+                                         .FirstOrDefault(au => au.UserId == userId && au.AssignmentId == assignmentId);
+
+            if (existingJoin == null)
+            {
+                var assignmentUser = new AssignmentUser
+                {
+                    UserId = userId,
+                    AssignmentId = assignmentId
+                };
+
+                // Insert into the AssignmentUser join table
+                _database.Insert(assignmentUser);
+            }
+        }
+
+
+        public List<Assignment> GetAssignmentsForUser(int userId)
+        {
+            var userAssignments = _database.Table<AssignmentUser>()
+                                            .Where(au => au.UserId == userId)
+                                            .ToList();
+
+            var assignments = new List<Assignment>();
+            foreach (var userAssignment in userAssignments)
+            {
+                var assignment = _database.Table<Assignment>()
+                                           .FirstOrDefault(a => a.Id == userAssignment.AssignmentId);
+                if (assignment != null)
+                {
+                    assignments.Add(assignment);
+                }
+            }
+
+            return assignments;
+        }
+
+
+
+
 
 
 

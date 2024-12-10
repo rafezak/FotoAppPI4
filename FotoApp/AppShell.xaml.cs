@@ -26,7 +26,7 @@ namespace FotoApp
                     Command = new Command(async () =>
                     {
                         // Navigate to Admin page
-                        Navigation.PushAsync(new AdminPage());
+                       await Navigation.PushAsync(new AdminPage());
                     })
                 };
 
@@ -101,6 +101,10 @@ namespace FotoApp
                 }
 
             }
-        
+
+        private void Profile_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Profile());
+        }
     }
 }
