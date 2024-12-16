@@ -29,5 +29,22 @@ namespace FotoApp.Repositories
                             .Where(p => p.AssignmentId == assignmentId)
                             .ToList();
         }
+
+        public Picture GetPictureForAssignmentAndUser(int assignmentId, int userId)
+        {
+            return _database.Table<Picture>()
+                            .FirstOrDefault(p => p.AssignmentId == assignmentId && p.UploadedBy == userId);
+        }
+
+        public void LikePicture(int pictureId)
+        {
+            var picture = _database.Table<Picture>().FirstOrDefault(p => p.Id == pictureId);
+            if (picture != null)
+            {
+                picture.Likes++;
+                _database.Update(picture);
+            }
+        }
+
     }
 }

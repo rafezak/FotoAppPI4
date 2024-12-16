@@ -12,19 +12,32 @@ namespace FotoApp.Repositories
     {
         private readonly SQLiteConnection _database;
 
-        public CommentRepository(string dbPath)
+        public CommentRepository()
         {
-            _database = new SQLiteConnection(dbPath);
+            _database = new SQLiteConnection(DatabaseConstants.DatabasePath, DatabaseConstants.Flags);
+            _database.CreateTable<Comment>();
         }
 
-        public List<Comment> GetCommentsByPicture(int pictureId)
+        public List<Comment> GetCommentsForPicture(int pictureId)
         {
-            return _database.Table<Comment>().Where(c => c.PictureId == pictureId).ToList();
+            return _database.Table<Comment>()
+                            .Where(c => c.PictureId == pictureId)
+                            .OrderBy(c => c.CreatedAt)
+                            .ToList();
         }
 
-        public void AddComment(Comment comment)
+
+        public void AddComment(int pictureId, int userId, string content)
         {
-            _database.Insert(comment);
+            var newComment = new Comment
+            {
+                PictureId = pictureId,
+                UserId = userId,
+                Text = content,
+                CreatedAt = DateTime.Now
+            };
+
+            _database.Insert(newComment);
         }
     }
 }

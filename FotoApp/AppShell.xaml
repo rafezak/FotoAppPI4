@@ -25,10 +25,17 @@
             Clicked="Assignments_Clicked" />
 
         <ToolbarItem
+            x:Name="Feed"
+            Text="Feed"
+            Clicked="Feed_Clicked" />
+
+        <ToolbarItem
             x:Name="Profile"
             Priority="2"
             Clicked="Profile_Clicked"
             IconImageSource="profile.png" />
+        
+        
 
 
         <ToolbarItem Text="{Binding DisplayPoints}" Order="Secondary" />

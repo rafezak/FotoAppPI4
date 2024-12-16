@@ -2,6 +2,7 @@
 using FotoApp.Modles;
 using SQLite;
 using FotoApp.Views;
+
 namespace FotoApp
 {
     using System.Collections.ObjectModel;

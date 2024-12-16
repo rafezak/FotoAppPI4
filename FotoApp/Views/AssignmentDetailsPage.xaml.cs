@@ -13,8 +13,8 @@ public partial class AssignmentDetailsPage : ContentPage
     private AssignmentViewModel _currentAssignment;
 
     public AssignmentDetailsPage(AssignmentViewModel selectedAssignment)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _currentAssignment = selectedAssignment;
 
@@ -31,6 +31,7 @@ public partial class AssignmentDetailsPage : ContentPage
 
         BindingContext = selectedAssignment;
 
+        LoadDetails();
 
 
 
@@ -64,33 +65,72 @@ public partial class AssignmentDetailsPage : ContentPage
         }
     }
 
+    private void LoadDetails()
+    {
+        // Set binding context for basic assignment details
+        BindingContext = _currentAssignment;
+
+        // Check if the user has uploaded a picture
+        var uploadedPicture = _pictureRepository.GetPictureForAssignmentAndUser(_currentAssignment.Id, AppShell.LoggedInUser.Id);
+        if (uploadedPicture != null)
+        {
+            UploadPictureButton.IsVisible = false;
+            AssignmentStatusLabel.Text = "Completed";
+            AssignmentStatusLabel.TextColor = Colors.Green;
+
+            // Display the uploaded picture
+            UploadedPicture.Source = ImageSource.FromFile(uploadedPicture.ImagePath);
+            UploadedPicture.IsVisible = true;
+        }
+        else
+        {
+            UploadPictureButton.IsVisible = true;
+            AssignmentStatusLabel.Text = "Pending";
+            AssignmentStatusLabel.TextColor = Colors.Red;
+            UploadedPicture.IsVisible = false;
+        }
+    }
+
     private async void OnUploadPictureClicked(object sender, EventArgs e)
     {
         try
         {
-            // Open media picker to select an image
-            var result = await FilePicker.PickAsync(new PickOptions
-            {
-                FileTypes = FilePickerFileType.Images,
-                PickerTitle = "Select a picture to upload"
-            });
+            string action = await DisplayActionSheet("Upload Picture", "Cancel", null, "Take Photo", "Choose from Gallery");
 
-            if (result != null)
+            string filePath = null;
+
+            if (action == "Take Photo")
             {
-                // Save the picture to the database
+                var photo = await MediaPicker.CapturePhotoAsync();
+                filePath = photo?.FullPath;
+            }
+            else if (action == "Choose from Gallery")
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = "Select a picture to upload"
+                });
+                filePath = result?.FullPath;
+            }
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
                 var newPicture = new Picture
                 {
-                    AssignmentId = _currentAssignment.Id, // Use the current assignment's ID
-                    ImagePath = result.FullPath,
-                    UploadedAt = DateTime.Now
+                    AssignmentId = _currentAssignment.Id,
+                    ImagePath = filePath,
+                    UploadedAt = DateTime.Now,
+                    UploadedBy = AppShell.LoggedInUser.Id
+                    
                 };
 
                 _pictureRepository.AddPicture(newPicture);
 
-                // Refresh the pictures displayed
-                LoadPictures();
-
                 await DisplayAlert("Success", "Picture uploaded successfully!", "OK");
+
+                // Reload details to show updated status and picture
+                LoadDetails();
             }
         }
         catch (Exception ex)
@@ -98,6 +138,8 @@ public partial class AssignmentDetailsPage : ContentPage
             await DisplayAlert("Error", $"Failed to upload picture: {ex.Message}", "OK");
         }
     }
+
+
 
 
     private void LoadPictures()
@@ -110,6 +152,20 @@ public partial class AssignmentDetailsPage : ContentPage
         PicturesCollectionView.ItemsSource = pictures;
     }
 
+
+    private async Task SavePicture(string filePath)
+    {
+        // Create a new Picture object
+        var newPicture = new Picture
+        {
+            AssignmentId = _currentAssignment.Id,
+            ImagePath = filePath,
+            UploadedAt = DateTime.Now
+
+        };
+
+
+    }
 }
 
 

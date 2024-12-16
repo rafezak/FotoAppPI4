@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FotoApp.Feed"
+             Title="Feed">
+    <StackLayout>
+        <Picker
+            x:Name="Assignmentpicker"  
+            Title="Select an Assignment"
+            SelectedIndexChanged="Assignmentpicker_SelectedIndexChanged"
+            ItemsSource="{Binding Assignments}" 
+            ItemDisplayBinding="{Binding Name}" />
+
+
+
+
+        <CollectionView x:Name="PictureCollectionView" ItemsSource="{Binding Pictures}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="10" Padding="10" BackgroundColor="#f4f4f4">
+                        <!-- Picture -->
+                        <Image Source="{Binding Picture.ImagePath}" HeightRequest="200" Aspect="AspectFill" />
+
+                        <!-- Like and Comment -->
+                        <HorizontalStackLayout Spacing="10">
+                            <Button Text="👍 Like" Clicked="OnLikeClicked" CommandParameter="{Binding Picture.Id}" />
+                            <Label Text="{Binding Picture.Likes}" VerticalOptions="Center" />
+                            <Button Text="💬 Comment" Clicked="OnCommentClicked" CommandParameter="{Binding Picture.Id}" />
+                        </HorizontalStackLayout>
+
+                        <!-- Comments -->
+                        <Label Text="Comments:" FontAttributes="Bold" />
+                        <CollectionView ItemsSource="{Binding Comments}" HeightRequest="100">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding Text}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+
+
+                        </CollectionView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

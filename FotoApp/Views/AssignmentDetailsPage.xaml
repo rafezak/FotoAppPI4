@@ -18,6 +18,18 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Label Text="{Binding Name}" FontSize="24" FontAttributes="Bold" />
+
+            <!-- Assignment Description -->
+            <Label Text="{Binding Description}" FontSize="16" />
+
+            <!-- Assignment Status -->
+            <Label x:Name="AssignmentStatusLabel" FontSize="18" FontAttributes="Italic" />
+
+            <!-- Uploaded Picture -->
+            <Image x:Name="UploadedPicture" IsVisible="False" HeightRequest="200" WidthRequest="200" />
+
+
 
             <Button
                 x:Name="JoinAssignmentButton"

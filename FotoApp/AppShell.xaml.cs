@@ -106,5 +106,11 @@ namespace FotoApp
         {
             Navigation.PushAsync(new Profile());
         }
+
+        private void Feed_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Feed());
+
+        }
     }
 }
