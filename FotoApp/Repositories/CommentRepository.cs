@@ -20,10 +20,16 @@ namespace FotoApp.Repositories
 
         public List<Comment> GetCommentsForPicture(int pictureId)
         {
-            return _database.Table<Comment>()
-                            .Where(c => c.PictureId == pictureId)
-                            .OrderBy(c => c.CreatedAt)
-                            .ToList();
+            var comments = _database.Table<Comment>().Where(c => c.PictureId == pictureId).OrderBy(c => c.CreatedAt).ToList();
+
+            //foreach (var comment in comments)
+            //{
+            //    // Fetch the username for each comment's UserId
+            //    var user = _database.Table<User>().FirstOrDefault(u => u.Id == comment.UserId);
+            //    comment = user != null ? user.Username : "Unknown";
+            //}
+
+            return comments;
         }
 
 
@@ -39,5 +45,8 @@ namespace FotoApp.Repositories
 
             _database.Insert(newComment);
         }
+
+
+
     }
 }

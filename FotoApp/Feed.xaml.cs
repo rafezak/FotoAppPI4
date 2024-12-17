@@ -10,6 +10,7 @@ public partial class Feed : ContentPage
     private readonly PictureRepository _pictureRepository = new PictureRepository();
     private readonly CommentRepository _commentRepository = new CommentRepository();
     private readonly AssignmentRepository _assignmentRepository = new AssignmentRepository();
+    private readonly UserRepository _userRepository = new UserRepository();
 
     public ObservableCollection<Assignment> Assignments { get; set; }
     public ObservableCollection<PictureCommentViewModel> Pictures { get; set; }
@@ -19,6 +20,7 @@ public partial class Feed : ContentPage
         _commentRepository = new CommentRepository();
         _pictureRepository = new PictureRepository();
         _assignmentRepository = new AssignmentRepository();
+        _userRepository = new UserRepository();
 
         Assignments = new ObservableCollection<Assignment>(_assignmentRepository.GetAllAssignments());
         Pictures = new ObservableCollection<PictureCommentViewModel>();
@@ -33,21 +35,21 @@ public partial class Feed : ContentPage
 
         if (selectedAssignment != null)
         {
-            // Fetch pictures for the selected assignment
-            var pictures = _pictureRepository.GetPicturesForAssignment(selectedAssignment.Id);
+            LoadPicturesForAssignment(selectedAssignment.Id);
 
-            // Clear existing pictures
-            Pictures.Clear();
-
-            // Populate pictures with associated comments
-            foreach (var picture in pictures)
-            {
-                var comments = _commentRepository.GetCommentsForPicture(picture.Id);
-                Pictures.Add(new PictureCommentViewModel(picture, comments));
-            }
 
 
         }
+    }
+
+    private void LoadCommentsForPicture(Picture picture)
+    {
+        var comments = _commentRepository.GetCommentsForPicture(picture.Id);
+        var users = _userRepository.GetAllUsers();  // Fetch all users to find usernames
+
+        // Create the ViewModel with picture, comments, and users
+        var viewModel = new PictureCommentViewModel(picture, comments, users);
+        BindingContext = viewModel;
     }
 
     private void OnAssignmentSelectedChanged(object sender, EventArgs e)
@@ -62,6 +64,7 @@ public partial class Feed : ContentPage
     private void LoadPicturesForAssignment(int assignmentId)
     {
         var pictures = _pictureRepository.GetPicturesForAssignment(assignmentId);
+        var users = _userRepository.GetAllUsers();  // Fetch all users to find usernames
 
         var picturesWithComments = new ObservableCollection<PictureCommentViewModel>();
 
@@ -70,7 +73,7 @@ public partial class Feed : ContentPage
             var comments = _commentRepository.GetCommentsForPicture(picture.Id);
 
             // Create the view model to hold the picture and its comments
-            picturesWithComments.Add(new PictureCommentViewModel(picture, comments));
+            picturesWithComments.Add(new PictureCommentViewModel(picture, comments, users));
         }
 
         // Bind the pictures and comments to the CollectionView

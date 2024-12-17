@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FotoApp.Feed"
              Title="Feed">
-    <StackLayout>
+    <ScrollView>
+        <StackLayout>
         <Picker
             x:Name="Assignmentpicker"  
             Title="Select an Assignment"
@@ -29,20 +30,23 @@
                         </HorizontalStackLayout>
 
                         <!-- Comments -->
-                        <Label Text="Comments:" FontAttributes="Bold" />
-                        <CollectionView ItemsSource="{Binding Comments}" HeightRequest="100">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Label Text="{Binding Text}" />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-
-
-
-                        </CollectionView>
-                    </StackLayout>
+                            <Label Text="Comments:" FontAttributes="Bold" />
+                            <CollectionView ItemsSource="{Binding Comments}" HeightRequest="100">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <!-- Username -->
+                                            <Label Text="{Binding Username}" FontAttributes="Bold" TextColor="Black" TextDecorations="Underline"  />
+                                            <!-- Comment Text -->
+                                            <Label Text="{Binding Text}" TextColor="Black" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
