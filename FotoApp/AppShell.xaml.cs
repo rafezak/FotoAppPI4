@@ -112,5 +112,11 @@ namespace FotoApp
             Navigation.PushAsync(new Feed());
 
         }
+
+        private void Helper_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new OpenAI());
+
+        }
     }
 }

@@ -18,7 +18,12 @@
      x:Name="HomeToolbar"
      Text="Home" 
      Clicked="HomeToolbar_Clicked" />
-        
+
+        <ToolbarItem
+            x:Name="Helper"
+            Text="Helper"
+            Clicked="Helper_Clicked"     />
+
         <ToolbarItem
             x:Name="Assignments"
             Text="Assignments"
@@ -34,6 +39,8 @@
             Priority="2"
             Clicked="Profile_Clicked"
             IconImageSource="profile.png" />
+        
+        
         
         
 
