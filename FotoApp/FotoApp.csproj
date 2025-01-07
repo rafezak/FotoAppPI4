@@ -57,6 +57,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="DALdb.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\admin.png" />
+	  <None Remove="Resources\Images\bulb.png" />
+	  <None Remove="Resources\Images\feed.png" />
+	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\Profile.png" />
 	</ItemGroup>
@@ -75,16 +83,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Feed.xaml">
+	  <MauiXaml Update="Views\Feed.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LoginPage.xaml">
+	  <MauiXaml Update="Views\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="OpenAI.xaml">
+	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Profile.xaml">
+	  <MauiXaml Update="Views\OpenAI.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Profile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AssignmentDetailsPage.xaml">
@@ -97,6 +108,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Waitpage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

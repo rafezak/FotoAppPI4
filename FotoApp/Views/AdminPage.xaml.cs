@@ -79,4 +79,10 @@ public partial class AdminPage : ContentPage
             }
         }
     }
+
+    private void Createtheme_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CreateTheme());
+
+    }
 }

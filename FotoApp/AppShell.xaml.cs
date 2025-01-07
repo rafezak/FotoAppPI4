@@ -11,49 +11,36 @@ namespace FotoApp
         public AppShell(User currentUser)
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("HomePage", typeof(HomePage));
+            Routing.RegisterRoute("HelperPage", typeof(OpenAI));
+            Routing.RegisterRoute("FeedPage", typeof(Feed));
+            Routing.RegisterRoute("ProfilePage", typeof(Profile));
+            Routing.RegisterRoute("AdminPage", typeof(AdminPage));
+
+
+
+
             _currentUser = currentUser;
             LoggedInUser = currentUser;
             BindingContext = this;
 
-            // Add the Admin toolbar item only if the user is an Admin
+            Routing.RegisterRoute(nameof(CreateTheme), typeof(CreateTheme));
+
+            //Add the Admin toolbar item only if the user is an Admin
             if (_currentUser.Role == UserRoles.Admin)
             {
-                var adminToolbarItem = new ToolbarItem
-                {
-                    Text = "Admin",
-                    IconImageSource = "admin_icon.png", // Optional icon
-                    Priority = 2,
-                    Command = new Command(async () =>
-                    {
-                        // Navigate to Admin page
-                       await Navigation.PushAsync(new AdminPage());
-                    })
-                };
+                Admintab.IsEnabled = true;
 
-                // Add the toolbar item for admins
-                ToolbarItems.Add(adminToolbarItem);
             }
 
-            if (_currentUser.Role == UserRoles.Admin)
-            {
-                var addThemeToolbarItem = new ToolbarItem
-                {
-                    Text = "Add Theme",
-                    IconImageSource = "add_theme_icon.png", // Optional icon
-                    Command = new Command(async () =>
-                    {
-                        // Navigate to AddThemePage
-                        await Shell.Current.GoToAsync(nameof(CreateTheme));
-                    })
-                };
-
-                // Add the toolbar item for admins
-                ToolbarItems.Add(addThemeToolbarItem);
-            }
+            
+        }
+    
 
             // Register the AddThemePage route
-            Routing.RegisterRoute(nameof(CreateTheme), typeof(CreateTheme));
-        }
+            
+   
 
                  public string DisplayPoints
                  {
@@ -77,7 +64,7 @@ namespace FotoApp
 
             private void HomeToolbar_Clicked(object sender, EventArgs e)
             {
-                Navigation.PushAsync(new MainPage());
+                Navigation.PushAsync(new HomePage());
 
             }
 

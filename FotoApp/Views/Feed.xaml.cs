@@ -3,7 +3,7 @@ using FotoApp.Repositories;
 using FotoApp.ViewModels;
 using System.Collections.ObjectModel;
 
-namespace FotoApp;
+namespace FotoApp.Views;
 
 public partial class Feed : ContentPage
 {

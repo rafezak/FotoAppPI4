@@ -31,7 +31,7 @@ namespace FotoApp.Services
                     new { role = "system", content = "You are a helpful assistant." },
                     new { role = "user", content = prompt }
                 },
-                max_tokens = 100
+                max_tokens = 75
             };
 
             var content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");

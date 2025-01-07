@@ -3,54 +3,63 @@
     x:Class="FotoApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FotoApp"
+    xmlns:local="clr-namespace:FotoApp.Views"
     Shell.FlyoutBehavior="Disabled"
-    Title="FotoApp">
+    Title="FotoApp"
+    BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <ShellContent 
-        Route="InlogPage" 
-        ContentTemplate="{DataTemplate local:LoginPage}" />
-
-
-    <Shell.ToolbarItems>
-        <ToolbarItem
+    <Shell.Resources>
+        <Style TargetType="TabBar">
             
-     x:Name="HomeToolbar"
-     Text="Home" 
-     Clicked="HomeToolbar_Clicked" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="#333" />
+          
 
-        <ToolbarItem
-            x:Name="Helper"
-            Text="Helper"
-            Clicked="Helper_Clicked"     />
+           
+            
+            
 
-        <ToolbarItem
-            x:Name="Assignments"
-            Text="Assignments"
-            Clicked="Assignments_Clicked" />
+            
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#A1A1FF" />
+            
 
-        <ToolbarItem
-            x:Name="Feed"
-            Text="Feed"
-            Clicked="Feed_Clicked" />
+      
+            <Setter Property="Shell.TabBarTitleColor" Value="White" />
 
-        <ToolbarItem
-            x:Name="Profile"
-            Priority="2"
-            Clicked="Profile_Clicked"
-            IconImageSource="profile.png" />
-        
-        
+
+            
+        </Style>
+
+    </Shell.Resources>
+
+    
+
+    <TabBar >
         
         
 
 
-        <ToolbarItem Text="{Binding DisplayPoints}" Order="Secondary" />
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
 
+        <Tab Title="Helper" Icon="bulb.png">
+            <ShellContent Route="HelperPage" ContentTemplate="{DataTemplate local:OpenAI}" />
+        </Tab>
 
+        <Tab Title="Feed" Icon="feed.png" >
+            <ShellContent Route="FeedPage" ContentTemplate="{DataTemplate local:Feed}" />
+        </Tab>
 
-    </Shell.ToolbarItems>
+        <Tab Title="Profile" Icon="profile.png">
+            <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:Profile}" />
+        </Tab>
 
+        <Tab x:Name="Admintab" Title="Admin" Icon="admin.png" IsEnabled="False">
+            <ShellContent Route="AdminPage" ContentTemplate="{DataTemplate local:AdminPage}" />
+        </Tab>
+    </TabBar>
+
+    
     
 </Shell>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FotoApp.Views.Profile"
+             Title="Profile">
+
+    <Grid Padding="20">
+        <!-- Define two rows: one for content and one for the logout button -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Content takes up the remaining space -->
+            <RowDefinition Height="Auto" />
+            <!-- Logout button at the bottom -->
+        </Grid.RowDefinitions>
+
+        <!-- Main content goes in the first row (row 0) -->
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <!-- User Info Section -->
+                <Label Text="User Information" FontSize="24" FontAttributes="Bold" />
+                <Label x:Name="Namelabel" FontSize="18" />
+                <Label x:Name="RoleLabel" FontSize="18" />
+                <Label x:Name="PointLabel" FontSize="18" />
+
+                <!-- Joined Assignments Section -->
+                <Label Text="Your Joined Assignments" FontSize="24" FontAttributes="Bold" />
+
+                <!-- Create buttons for each assignment -->
+                <StackLayout x:Name="AssignmentsStackLayout">
+                    <!-- Buttons will be added dynamically here -->
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Logout button goes in the second row (row 1) -->
+        <Button Grid.Row="1" Text="Logout" Clicked="OnLogoutClicked" BackgroundColor="Red" TextColor="White" />
+    </Grid>
+</ContentPage>

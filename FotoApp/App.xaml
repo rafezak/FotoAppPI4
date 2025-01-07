@@ -5,6 +5,18 @@
              x:Class="FotoApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#4CAF50</Color>
+            <!-- Green -->
+            <Color x:Key="SecondaryColor">#FFC107</Color>
+            <!-- Amber -->
+            <Color x:Key="AccentColor">#FF5722</Color>
+            <!-- Deep Orange -->
+            <Color x:Key="BackgroundColor">#F5F5F5</Color>
+            <!-- Light Grey -->
+            <Color x:Key="TextColor">#212121</Color>
+            <!-- Dark Grey -->
+            <Color x:Key="ButtonColor">#009688</Color>
+            <!-- Teal -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

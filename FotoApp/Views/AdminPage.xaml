@@ -3,21 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FotoApp.Views.AdminPage"
              Title="AdminPage">
-    <StackLayout>
-        <Label Text="User Management" FontSize="Large" HorizontalOptions="Center" />
-        <ListView x:Name="UserListView" ItemSelected="OnUserSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Username}" FontSize="Medium" />
-                            <Label Text="{Binding Points}" FontSize="Medium" />
-                            <Button Text="Edit Points" Clicked="OnEditPointsClicked" />
-                            <Button x:Name="DeleteUser" Text="Delete User" Clicked="DeleteUser_Clicked"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <ScrollView Grid.Row="0">
+            <StackLayout>
+                <Label Text="User Management" FontSize="Large" HorizontalOptions="Center" />
+                <ListView x:Name="UserListView" ItemSelected="OnUserSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Username}" FontSize="Medium" />
+                                    <Label Text="{Binding Points}" FontSize="Medium" />
+                                    <Button Text="Edit Points" Clicked="OnEditPointsClicked" />
+                                    <Button x:Name="DeleteUser" Text="Delete User" Clicked="DeleteUser_Clicked"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+        
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
+            <Button x:Name="Createtheme" Text="Create Theme" Clicked="Createtheme_Clicked" />
+        </StackLayout>
+        
+        
+    </Grid>
 </ContentPage>

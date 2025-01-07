@@ -14,7 +14,7 @@ namespace FotoApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            
             // Retrieve the user from BindingContext
             if (BindingContext is User currentUser)
             {

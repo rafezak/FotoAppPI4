@@ -1,6 +1,6 @@
 using FotoApp.Services;
 
-namespace FotoApp;
+namespace FotoApp.Views;
 
 public partial class OpenAI : ContentPage
 {

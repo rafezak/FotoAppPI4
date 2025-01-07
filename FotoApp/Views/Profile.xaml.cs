@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls;
 using FotoApp.Modles;
 using FotoApp.Views;
 
-namespace FotoApp;
+namespace FotoApp.Views;
 
 public partial class Profile : ContentPage
 {
@@ -21,6 +21,16 @@ public partial class Profile : ContentPage
         LoadUserInfo();
         LoadJoinedAssignments();
 
+    }
+
+    private async void OnLogoutClicked(object sender, EventArgs e)
+    {
+        // Clear saved credentials
+        SecureStorage.Remove("username");
+        SecureStorage.Remove("password");
+
+        // Navigate to login page
+        Application.Current.MainPage = new NavigationPage(new LoginPage());
     }
 
 
