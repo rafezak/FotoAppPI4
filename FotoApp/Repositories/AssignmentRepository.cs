@@ -57,7 +57,6 @@ namespace FotoApp.Repositories
             {
                 Name = "Science Project",
                 Description = "Prepare the presentation",
-
             };
             _database.Insert(assignment);
 
@@ -65,12 +64,7 @@ namespace FotoApp.Repositories
             AddThemeToAssignment(assignment.Id, theme.Id);
         }
 
-        
-
-
-
-
-
+        // Adds a theme to an assignment
         public void AddThemeToAssignment(int assignmentId, int themeId)
         {
             var assignmentTheme = new AssignmentTheme
@@ -81,6 +75,7 @@ namespace FotoApp.Repositories
             _database.Insert(assignmentTheme);
         }
 
+        // Retrieves the themes associated with an assignment
         public List<Theme> GetThemesForAssignment(int assignmentId)
         {
             var themeIds = _database.Table<AssignmentTheme>()
@@ -93,6 +88,7 @@ namespace FotoApp.Repositories
                             .ToList();
         }
 
+        // Retrieves the assignments associated with a theme
         public List<Assignment> GetAssignmentsForTheme(int themeId)
         {
             var assignmentIds = _database.Table<AssignmentTheme>()
@@ -105,6 +101,7 @@ namespace FotoApp.Repositories
                             .ToList();
         }
 
+        // Retrieves the assignments with their associated themes
         public List<AssignmentViewModel> GetAssignmentsWithThemes()
         {
             var assignments = _database.Table<Assignment>().ToList();
@@ -131,9 +128,9 @@ namespace FotoApp.Repositories
             }
 
             return assignmentViewModels;
-            
         }
 
+        // Retrieves the assignments with their associated themes for a specific user
         public List<AssignmentViewModel> GetAssignmentsWithThemesForUser(int userId)
         {
             var assignmentIds = _database.Table<AssignmentUser>()
@@ -170,8 +167,7 @@ namespace FotoApp.Repositories
             return assignmentViewModels;
         }
 
-
-
+        // Joins a user to an assignment
         public void JoinAssignment(int userId, int assignmentId)
         {
             // Check if the user is already joined to the assignment
@@ -191,7 +187,7 @@ namespace FotoApp.Repositories
             }
         }
 
-
+        // Retrieves the assignments associated with a user
         public List<Assignment> GetAssignmentsForUser(int userId)
         {
             var userAssignments = _database.Table<AssignmentUser>()
@@ -212,19 +208,11 @@ namespace FotoApp.Repositories
             return assignments;
         }
 
-
+        // Checks if a user has joined an assignment
         public bool HasUserJoinedAssignment(int userId, int assignmentId)
         {
             return _database.Table<AssignmentUser>()
                             .Any(au => au.UserId == userId && au.AssignmentId == assignmentId);
         }
-
-
-
-
-
-
-
-
     }
 }
