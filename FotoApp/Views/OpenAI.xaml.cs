@@ -27,19 +27,46 @@ public partial class OpenAI : ContentPage
         }
     }
 
-    private async void Idea_Clicked(object sender, EventArgs e)
-    {
+   private async void Idea_Clicked(object sender, EventArgs e)
+   {
         try
         {
-            string prompt = "give me a random assignment idea for users to take a picture of something ";
+            waitlabel.IsVisible = true;
+            waitlabel.Text = "Thinking... please wait";
+            string prompt = "give me a random assignment idea for users to take a picture of something. Only the idea ";
             string response = await _openai.GetChatGPTResponse(prompt);
 
-            await DisplayAlert("ChatGPT Response", response, "OK");
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("kaas", ex.Message, "OK");
-        }
 
-    }
+            string formattedResponse = string.Join("\n", response.Split(' ').Chunk(6).Select(chunk => string.Join(" ", chunk)));
+            string action = await DisplayActionSheet(formattedResponse, "Cancel", null, null, "Create Assignment");
+            waitlabel.IsVisible = false;
+
+
+
+
+
+            if (action == "OK")
+            {
+                // User chose OK, do nothing or close the popup
+                waitlabel.IsVisible = false;
+            }
+            else if (action == "Create Assignment")
+            {
+                waitlabel.IsVisible = false;
+
+                // Navigate to CreateAssignmentPage and set BindingContext with response
+                var createAssignmentPage = new CreateAssignment
+                {
+                    BindingContext = new { IdeaDescription = response }
+                };
+
+                // Passing the response
+                await Navigation.PushAsync(createAssignmentPage);
+
+            }
+        }
+        catch (Exception ex) {
+            await DisplayAlert("alert", ex.Message, "OK");
+        }
+   }
 }

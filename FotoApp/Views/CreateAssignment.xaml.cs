@@ -21,7 +21,25 @@ namespace FotoApp.Views
 
             // Load themes when the page initializes
             LoadThemes();
+
+            
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Check if the BindingContext contains "IdeaDescription"
+            if (BindingContext is { } context && context.GetType().GetProperty("IdeaDescription") is { } prop)
+            {
+                string ideaDescription = prop.GetValue(context)?.ToString();
+                if (!string.IsNullOrEmpty(ideaDescription))
+                {
+                    DescriptionEditor.Text = ideaDescription; // Pre-fill the description field
+                }
+            }
+        }
+
 
         private async void LoadThemes()
         {

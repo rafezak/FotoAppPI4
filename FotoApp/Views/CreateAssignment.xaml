@@ -11,7 +11,7 @@
 
         <!-- Description Input -->
         <Label Text="Description" />
-        <Editor x:Name="DescriptionEditor" Placeholder="Enter description" />
+        <Entry x:Name="DescriptionEditor" Placeholder="Enter description" />
 
         <!-- Due Date Input -->
         <Label Text="Due Date" />

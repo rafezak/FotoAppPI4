@@ -13,9 +13,12 @@
         Text="💡Assignment Idea💡"
         Clicked="Idea_Clicked"
         Margin="10" />
-        
-        
-        
+
+
+        <Label
+            x:Name="waitlabel"/>
+
+
 
     </VerticalStackLayout>
 </ContentPage>

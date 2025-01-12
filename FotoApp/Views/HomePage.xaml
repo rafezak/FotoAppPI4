@@ -7,7 +7,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="20">
+            <StackLayout Padding="20" Spacing="20">
 
                 <!-- Logo -->
                 <Image Source="app_logo.png" 
@@ -21,35 +21,43 @@
                    HorizontalOptions="Center"
                    FontAttributes="Bold" />
 
-                <Label Text="Maak en Deel Foto's met de rest van de Wereld!" 
+                <Label Text="Capture and Share Photos with the World!" 
                    FontSize="16" 
                    TextColor="#AAAAAA" 
                    HorizontalOptions="Center" />
 
                 <!-- Feature Buttons -->
-                <Button Text="📷 Upload een Foto"
+                <Button
+                    x:Name="assignmentButton"
+                    Text="📷 View Assignments"
                     FontSize="18"
                     TextColor="White"
                     BackgroundColor="#4CAF50"
                     CornerRadius="10"
                     HeightRequest="50"
+                    Clicked="assignmentButton_Clicked"
                      />
 
-                <Button Text="📰 Bekijk Feed"
+                <Button 
+                    x:Name="feedButton"
+                    Text="📰 View Feed"
                     FontSize="18"
                     TextColor="White"
                     BackgroundColor="#2196F3"
                     CornerRadius="10"
                     HeightRequest="50"
-                     />
+                   Clicked="feedButton_Clicked" />
 
-                <Button Text="⚙️ Admin Configuratie"
+
+                <Button
+                    x:Name="adminButton"
+                    Text="⚙️ Admin Configuration"
                     FontSize="18"
                     TextColor="White"
                     BackgroundColor="#FF5722"
                     CornerRadius="10"
                     HeightRequest="50"
-                    
+                    Clicked="adminButton_Clicked"
                     IsVisible="{Binding IsAdmin}" />
 
                 <!-- Divider -->
@@ -58,21 +66,21 @@
                      HorizontalOptions="Fill" />
 
                 <!-- Information Section -->
-                <Label Text= "Ontdek diverse foto's and deel je eigen speciale Foto's met de rest van de community!"
+                <Label Text= "Discover various photos and share your own special photos with the community!"
                    FontSize="16"
                    TextColor="#AAAAAA"
                    HorizontalOptions="Center"
                    LineBreakMode="WordWrap"
                    HorizontalTextAlignment="Center" />
 
-                <Label Text="laat je creativiteit schijnen met FotoApp!"
+                <Label Text="Let your creativity shine with FotoApp!"
                    FontSize="16"
                    TextColor="#AAAAAA"
                    HorizontalOptions="Center"
                    LineBreakMode="WordWrap"
                    HorizontalTextAlignment="Center" />
 
-            </VerticalStackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
